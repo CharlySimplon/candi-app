@@ -1,20 +1,3 @@
-# from flask import Flask,render_template
-# from flask_sqlalchemy import SQLAlchemy
-# from flask_login import LoginManager
-
-# app = Flask(__name__)
-
-# app.config.from_object('config')
-# db = SQLAlchemy(app)
-# login_manager = LoginManager(app)
-# login_manager.login_view = "login_page"
-# login_manager.login_message_category = "info"
-
-# from App import routes
-# from App import models
-
-#models.init_db()
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -31,13 +14,12 @@ def create_app():
     main.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     
 
-    from project.models import User
+    from App.models import User
 
     db.init_app(main)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
-    login_manager.login_message_category = "info"
     login_manager.init_app(main)
 
 
@@ -62,3 +44,4 @@ def create_app():
 
 app = create_app()
 db.create_all(app=create_app())
+
