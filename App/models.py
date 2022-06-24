@@ -4,6 +4,14 @@ from flask_login import UserMixin # allow to set variable is_active=True and to 
 import logging as lg
 from werkzeug.security import generate_password_hash
 import csv
+from App import db
+
+# class User(UserMixin, db.Model):
+#     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+#     email = db.Column(db.String(100), unique=True)
+#     password = db.Column(db.String(100))
+#     name = db.Column(db.String(1000))
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -29,7 +37,7 @@ class Users(db.Model,UserMixin):
     last_name = db.Column(db.String(length=30), nullable=False)
     first_name = db.Column(db.String(length=30), nullable=False)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
-    password_hash = db.Column(db.String(length=200), nullable=False)
+    password = db.Column(db.String(length=200), nullable=False)
     telephone_number = db.Column(db.String(length=10), nullable=True)
     is_admin = db.Column(db.Boolean(), nullable=False, default=False)
 
@@ -135,7 +143,7 @@ def init_db():
                 'email_address' : i[0],
                 'first_name' : i[1],
                 'last_name' : i[2],
-                'password_hash' : generate_password_hash(i[3], method='sha256'),
+                'password' : generate_password_hash(i[3], method='sha256'),
                 'is_admin' : True if i[4] == "TRUE" else False
             }
         Users(**user).save_to_db()

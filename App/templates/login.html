@@ -1,23 +1,29 @@
-{% extends 'base.html' %}
-
-{% block title %} 
-    Login
-{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-    <div class='container mt-5'>
-        <h1> Log in </h1>
-        <br>
-        <form method="POST" class="form-register">
-            {{ form.hidden_tag() }}
-            
-            {{ form.email.label() }}
-            {{ form.email(placeholder="exemple@exemple.com", class="form-control") }}
-            <br>
-            {{ form.password.label() }}
-            {{ form.password(placeholder="***********", class="form-control") }}
-            <br>
-            {{ form.submit(class="btn btn-lg btn-primary d-block", id="button")}}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Login</h3>
+    <div class="box">
+        <form method="POST" action="/login">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember">
+                    Remember me
+                </label>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Login</button>
         </form>
-    </div>  
+    </div>
+</div>
 {% endblock %}
