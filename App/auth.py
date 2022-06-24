@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from project.models import User
-from project import db
+from App import db
 
 auth = Blueprint('auth', __name__)
 
@@ -13,11 +13,11 @@ def login():
 @auth.route('/login', methods=['POST'])
 def login_post():
     # login code goes here
-    email = request.form.get('email')
+    email_address = request.form.get('email')
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
 
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email_address=email_address).first()
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
