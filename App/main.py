@@ -13,6 +13,10 @@ def index():
 def profile():
     return render_template('profile.html', name=current_user.name)
 
+@main.route('/debug-sentry')
+def trigger_error():
+    division_by_zero = 1 / 0
+
 # from App import app
 
 # if __name__ == '__main__':
